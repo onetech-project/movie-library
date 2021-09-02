@@ -1,32 +1,30 @@
 const initialState = {
   users: [],
-  isLoading: false
-}
+  isLoading: false,
+};
 
 export const userReducer = (state = initialState, action) => {
-  const { payload } = action
+  const { payload } = action;
   switch (action.type) {
     case 'FETCH_USER_REQUEST':
       return {
         ...state,
-        isLoading: true
-      }
+        isLoading: true,
+      };
 
     case 'FETCH_USER_SUCCESS':
       return {
         ...state,
         users: payload,
-        isLoading: false
-      }
+        isLoading: false,
+      };
     case 'FETCH_USER_FAILED':
       return {
         ...state,
-        isLoading: false
-      }
+        isLoading: false,
+      };
 
     default:
-      return state
+      return state;
   }
-}
-
-export default userReducer
+};

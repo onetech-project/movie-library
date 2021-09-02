@@ -1,9 +1,9 @@
-import 'react-native-gesture-handler'
-import React from 'react'
-import SplashScreen from 'react-native-splash-screen'
-import MainNavigation from './navigation/navigation'
-import { Provider } from 'react-redux'
-import { store } from './stores'
+import 'react-native-gesture-handler';
+import React from 'react';
+import SplashScreen from 'react-native-splash-screen';
+import { Provider } from 'react-redux';
+import MainNavigation from './navigation/navigation';
+import { store } from './stores';
 
 class App extends React.Component {
   componentDidMount() {
@@ -17,7 +17,7 @@ class App extends React.Component {
           <MainNavigation />
         </Provider>
       </>
-    )
+    );
   }
 }
 
