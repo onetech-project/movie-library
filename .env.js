@@ -1,5 +1,5 @@
 const os = require('os');
-const fs = require("fs-extra");
+const fs = require('fs-extra');
 const path = require('path');
 const glob = require('glob');
 const exec = require('child_process').exec;
@@ -23,7 +23,7 @@ const preCommitLinter = () => {
 
 // write bundle ID Android based on env configuration
 const changeBundleIDAndroid = () => {
-  const buckPath = `${__dirname}/android/app/BUCK`;
+  const buckPath = `${__dirname}/android/app/_BUCK`;
   const buildGradlePath = `${__dirname}/android/app/build.gradle`;
 
   const appSrcMainJavaPath = `${__dirname}/android/app/src/main/java`;
@@ -254,13 +254,13 @@ const configureLibrary = () => {
 
 const postInstallMac = () => {
   // setup bundle ID
-  changeBundleIDiOS();
-  changeBundleIDAndroid();
-  changeBundleAppJson();
+  // changeBundleIDiOS();
+  // changeBundleIDAndroid();
+  // changeBundleAppJson();
 
   // setup library
-  cocoaPodsConfig();
-  configureLibrary();
+  // cocoaPodsConfig();
+  // configureLibrary();
 
   // setup automated linter
   preCommitLinter();
@@ -268,11 +268,11 @@ const postInstallMac = () => {
 
 const postInstall = () => {
   // setup bundle ID
-  changeBundleIDAndroid();
-  changeBundleAppJson();
+  // changeBundleIDAndroid();
+  // changeBundleAppJson();
 
   // setup library
-  configureLibrary();
+  // configureLibrary();
 
   // setup automated linter
   preCommitLinter();
