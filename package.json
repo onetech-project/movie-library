@@ -37,6 +37,8 @@
     "appcenter-analytics": "4.2.0",
     "appcenter-crashes": "4.2.0",
     "axios": "^0.21.1",
+    "color": "^4.0.1",
+    "moment": "^2.29.1",
     "react": "17.0.2",
     "react-native": "0.65.1",
     "react-native-code-push": "^7.0.2",

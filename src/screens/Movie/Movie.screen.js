@@ -8,25 +8,23 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect, useDispatch } from 'react-redux';
-import styles from './Home.style';
+import styles from './Movie.style';
 import { fetchDataUser } from '../../stores/actions/user.action';
 import { Colors } from '../../utils';
 
-const Home = (params) => {
+const Movie = ({ movie }) => {
   const dispatch = useDispatch();
 
-  function ListUser() {
-    return params.user.map((data) => (
-      <View
-        key={data.id}
-        style={styles.users}
-      >
-        <Text style={styles.usersText}>
-          {data.id}. {data.name}
-        </Text>
-      </View>
-    ));
-  }
+  const ListMovie = () => movie.map((data) => (
+    <View
+      key={data.id}
+      style={styles.users}
+    >
+      <Text style={styles.usersText}>
+        {data.id}. {data.name}
+      </Text>
+    </View>
+  ));
 
   return (
     <>
@@ -42,7 +40,7 @@ const Home = (params) => {
             >
               <Text style={styles.text}>Click here to show User data:</Text>
             </TouchableOpacity>
-            <ListUser />
+            <ListMovie />
           </View>
         </View>
       </SafeAreaView>
@@ -54,4 +52,4 @@ const mapStateToProps = (state) => ({
   user: state.userReducer.users,
 });
 
-export default connect(mapStateToProps, null)(Home);
+export default connect(mapStateToProps, null)(Movie);

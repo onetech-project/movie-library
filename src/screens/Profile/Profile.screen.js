@@ -8,18 +8,19 @@ import {
   Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Colors } from '../../utils';
 import styles from './Profile.style';
 
-const Home = () => (
+const Profile = ({ navigation }) => (
   <>
-    <StatusBar barStyle="dark-content" backgroundColor="#f9f9f9" />
+    <StatusBar barStyle="dark-content" backgroundColor={Colors.whiteSmoke} />
     <SafeAreaView style={styles.SafeAreaView1} />
     <SafeAreaView style={styles.SafeAreaView2}>
       <View style={styles.outerWrapper}>
-        <Icon name="ios-settings" size={100} color="green" />
+        <Icon name="ios-settings" size={100} color={Colors.green} />
         <View>
           <TouchableOpacity
-            onPress={() => Alert.alert('this is Profile Screen')}
+            onPress={() => Alert.alert('', 'This is Profile Page', [{ text: 'OK', onPress: () => navigation.navigate('homebase') }])}
             style={styles.buttonStyle}
           >
             <Text style={styles.text}>
@@ -42,4 +43,4 @@ const Home = () => (
   </>
 );
 
-export default Home;
+export default Profile;

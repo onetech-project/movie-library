@@ -1,6 +1,9 @@
 module.exports = {
   root: true,
   extends: 'airbnb',
+  parserOptions: {
+    ecmaVersion: 2020,
+  },
   rules: {
     camelcase: 1,
     'import/extensions': 'off',
