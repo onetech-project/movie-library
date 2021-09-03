@@ -20,7 +20,7 @@ const Profile = ({ navigation }) => (
         <Icon name="ios-settings" size={100} color={Colors.green} />
         <View>
           <TouchableOpacity
-            onPress={() => Alert.alert('', 'This is Profile Page', [{ text: 'OK', onPress: () => navigation.navigate('homebase') }])}
+            onPress={() => Alert.alert('', 'This is Profile Page', [{ text: 'OK', onPress: () => navigation.navigate('Home') }])}
             style={styles.buttonStyle}
           >
             <Text style={styles.text}>

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { Colors } from '../../utils';
 
 export default StyleSheet.create({
@@ -22,8 +22,13 @@ export default StyleSheet.create({
     borderWidth: 0.5,
     borderColor: Colors.whiteSmoke,
     borderRadius: 10,
+    width: '100%',
+    minWidth: Dimensions.get('window').width - 50,
+    maxWidth: Dimensions.get('window').width - 20,
   },
-  text: { fontSize: 18, color: Colors.gray83, fontWeight: 'bold' },
+  text: {
+    fontSize: 18, color: Colors.gray83, fontWeight: 'bold', alignSelf: 'center',
+  },
   users: {
     borderBottomWidth: 1,
     borderColor: Colors.ee,

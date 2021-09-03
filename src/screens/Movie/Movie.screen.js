@@ -9,19 +9,21 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect, useDispatch } from 'react-redux';
 import styles from './Movie.style';
-import { fetchDataUser } from '../../stores/actions/user.action';
+import { fetchDataMovie } from '../../stores/actions/movie.action';
 import { Colors } from '../../utils';
+import { Loading } from '../../components';
 
 const Movie = ({ movie }) => {
+  const { isLoading, movies } = movie;
   const dispatch = useDispatch();
 
-  const ListMovie = () => movie.map((data) => (
+  const ListMovie = () => movies.map((data) => (
     <View
       key={data.id}
       style={styles.users}
     >
       <Text style={styles.usersText}>
-        {data.id}. {data.name}
+        {data.id}. {data.title}
       </Text>
     </View>
   ));
@@ -32,13 +34,15 @@ const Movie = ({ movie }) => {
       <SafeAreaView style={styles.SafeAreaView1} />
       <SafeAreaView style={styles.SafeAreaView2}>
         <View style={styles.outerWrapper}>
-          <Icon name="ios-home" size={100} color={Colors.purplePastel} />
+          <Icon name="logo-youtube" size={100} color={Colors.red} />
           <View>
             <TouchableOpacity
               style={styles.buttonStyle}
-              onPress={() => dispatch(fetchDataUser())}
+              onPress={() => (isLoading ? {} : dispatch(fetchDataMovie()))}
             >
-              <Text style={styles.text}>Click here to show User data:</Text>
+              {!isLoading ?
+                <Text style={styles.text}>Click here to show Movie data:</Text>
+                : <Loading size="large" />}
             </TouchableOpacity>
             <ListMovie />
           </View>
@@ -50,6 +54,7 @@ const Movie = ({ movie }) => {
 
 const mapStateToProps = (state) => ({
   user: state.userReducer.users,
+  movie: state.movieReducer,
 });
 
 export default connect(mapStateToProps, null)(Movie);

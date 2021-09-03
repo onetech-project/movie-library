@@ -3,9 +3,9 @@ import {
   breakingbad, kingdom, moneyheist, peakyblinders, walkingdead,
 } from '../assets/images';
 
-export const getMovie = () => {
+export const getMovie = () => new Promise((resolve, reject) => {
   try {
-    return Promise.resolve({
+    setTimeout(() => resolve({
       status: 'success',
       data: [
         {
@@ -59,8 +59,8 @@ export const getMovie = () => {
           release: moment().format('MMMM YYYY'),
         },
       ],
-    });
-  } catch (e) {
-    return Promise.reject(e);
+    }), 5000);
+  } catch (error) {
+    reject(error);
   }
-};
+});

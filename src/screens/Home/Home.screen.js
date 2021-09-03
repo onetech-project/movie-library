@@ -30,7 +30,7 @@ const Home = (params) => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor={Colors.whiteSmoke} />
+      <StatusBar translucent barStyle="dark-content" backgroundColor={Colors.gold} />
       <SafeAreaView style={styles.SafeAreaView1} />
       <SafeAreaView style={styles.SafeAreaView2}>
         <View style={styles.outerWrapper}>
