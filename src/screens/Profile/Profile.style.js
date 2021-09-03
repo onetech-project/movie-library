@@ -30,4 +30,11 @@ export default StyleSheet.create({
     marginTop: 10,
   },
   usersText: { fontSize: 15 },
+  author: {
+    alignContent: 'flex-end',
+    alignItems: 'flex-end',
+    padding: 10,
+  },
+  profile: { fontWeight: 'bold', color: 'green' },
+  authorText: { color: '#808080' },
 });
