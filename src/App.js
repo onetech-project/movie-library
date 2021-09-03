@@ -1,24 +1,25 @@
-import 'react-native-gesture-handler'
-import React from 'react'
-import SplashScreen from 'react-native-splash-screen'
-import MainNavigation from './navigation/navigation'
-import { Provider } from 'react-redux'
-import { store } from './stores'
+import 'react-native-gesture-handler';
+import React, { useEffect } from 'react';
+import SplashScreen from 'react-native-splash-screen';
+import { Provider } from 'react-redux';
+import codePush from 'react-native-code-push';
+import MainNavigation from './navigation/navigation';
+import { store } from './stores';
 
-class App extends React.Component {
-  componentDidMount() {
+const App = () => {
+  useEffect(() => {
     SplashScreen.hide();
-  }
+  }, []);
 
-  render() {
-    return (
-      <>
-        <Provider store={store}>
-          <MainNavigation />
-        </Provider>
-      </>
-    )
-  }
-}
+  return (
+    <>
+      <Provider store={store}>
+        <MainNavigation />
+      </Provider>
+    </>
+  );
+};
 
-export default App;
+const SuperApp = codePush({ updateDialog: true, installMode: codePush.InstallMode.IMMEDIATE })(App);
+
+export default SuperApp;

@@ -2,8 +2,14 @@
  * @format
  */
 
-import { AppRegistry } from 'react-native'
-import App from './src/App'
-import { name as appName } from './app.json'
+import { AppRegistry, Text } from 'react-native';
+import SuperApp from './src/App';
+import { name as appName } from './app.json';
+import { Fonts } from './src/utils';
 
-AppRegistry.registerComponent(appName, () => App)
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
+const baseStyle = Text.defaultProps?.style || {};
+Text.defaultProps.style = { ...baseStyle, fontFamily: Fonts.frutiger };
+
+AppRegistry.registerComponent(appName, () => SuperApp);

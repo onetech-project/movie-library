@@ -1,4 +1,7 @@
-import { breakingbad, kingdom, moneyheist, peakyblinders, walkingdead } from '../assets/images'
+import moment from 'moment';
+import {
+  breakingbad, kingdom, moneyheist, peakyblinders, walkingdead,
+} from '../assets/images';
 
 export const getMovie = () => {
   try {
@@ -13,7 +16,7 @@ export const getMovie = () => {
           type: 'series',
           genre: ['thriller', 'action', 'drama'],
           synopsis: 'Lorem ipsum dolor sit amet',
-          release: new Date()
+          release: moment().format('MMMM YYYY'),
         },
         {
           id: 2,
@@ -23,7 +26,7 @@ export const getMovie = () => {
           type: 'series',
           genre: ['action', 'drama'],
           synopsis: 'Lorem ipsum dolor sit amet',
-          release: new Date()
+          release: moment().format('MMMM YYYY'),
         },
         {
           id: 3,
@@ -33,7 +36,7 @@ export const getMovie = () => {
           type: 'series',
           genre: ['action', 'drama'],
           synopsis: 'Lorem ipsum dolor sit amet',
-          release: new Date()
+          release: moment().format('MMMM YYYY'),
         },
         {
           id: 4,
@@ -43,7 +46,7 @@ export const getMovie = () => {
           type: 'series',
           genre: ['action', 'drama'],
           synopsis: 'Lorem ipsum dolor sit amet',
-          release: new Date()
+          release: moment().format('MMMM YYYY'),
         },
         {
           id: 5,
@@ -53,15 +56,11 @@ export const getMovie = () => {
           type: 'series',
           genre: ['action', 'drama'],
           synopsis: 'Lorem ipsum dolor sit amet',
-          release: new Date()
+          release: moment().format('MMMM YYYY'),
         },
-      ]
-    })
+      ],
+    });
   } catch (e) {
-    return Promise.reject(e)
+    return Promise.reject(e);
   }
-}
-
-module.exports = {
-  getUser
-}
+};

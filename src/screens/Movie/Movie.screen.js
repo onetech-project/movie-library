@@ -1,63 +1,55 @@
-import React from 'react'
+import React from 'react';
 import {
   SafeAreaView,
   View,
   Text,
   StatusBar,
-  TouchableOpacity
-} from 'react-native'
-import styles from './Home.style'
-import Icon from 'react-native-vector-icons/Ionicons'
-import { connect, useDispatch } from 'react-redux'
-import { fetchDataUser } from '../../stores/actions/user.action'
+  TouchableOpacity,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { connect, useDispatch } from 'react-redux';
+import styles from './Movie.style';
+import { fetchDataUser } from '../../stores/actions/user.action';
+import { Colors } from '../../utils';
 
-const Movie = ({ navigation, movie }) => {
-  const dispatch = useDispatch()
+const Movie = ({ movie }) => {
+  const dispatch = useDispatch();
 
-  function ListMovie() {
-    return movie.map(data => {
-      return (
-        <View
-          key={data.id}
-          style={{
-            borderBottomWidth: 1,
-            borderColor: '#eee',
-            padding: 1,
-            marginTop: 10
-          }}>
-          <Text style={{ fontSize: 15 }}>
-            {data.id}. {data.name}
-          </Text>
-        </View>
-      )
-    })
-  }
+  const ListMovie = () => movie.map((data) => (
+    <View
+      key={data.id}
+      style={styles.users}
+    >
+      <Text style={styles.usersText}>
+        {data.id}. {data.name}
+      </Text>
+    </View>
+  ));
 
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor={'#f9f9f9'} />
+      <StatusBar barStyle="dark-content" backgroundColor={Colors.whiteSmoke} />
       <SafeAreaView style={styles.SafeAreaView1} />
       <SafeAreaView style={styles.SafeAreaView2}>
         <View style={styles.outerWrapper}>
-          <Icon name={'ios-home'} size={100} color={'purple'} />
+          <Icon name="ios-home" size={100} color={Colors.purplePastel} />
           <View>
             <TouchableOpacity
               style={styles.buttonStyle}
-              onPress={() => dispatch(fetchDataUser())}>
+              onPress={() => dispatch(fetchDataUser())}
+            >
               <Text style={styles.text}>Click here to show User data:</Text>
             </TouchableOpacity>
-            <ListUser />
+            <ListMovie />
           </View>
         </View>
       </SafeAreaView>
     </>
-  )
-}
+  );
+};
 
-const mapStateToProps = state => {
-  return {
-    user: state.userReducer.users
-  }
-}
+const mapStateToProps = (state) => ({
+  user: state.userReducer.users,
+});
 
-export default connect(mapStateToProps, null)(Home)
+export default connect(mapStateToProps, null)(Movie);
