@@ -1,41 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  SafeAreaView,
   View,
   Text,
-  StatusBar,
   TouchableOpacity,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { connect, useDispatch } from 'react-redux';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 import styles from './Movie.style';
-import { fetchDataMovie } from '../../stores/actions/movie.action';
 import { Colors } from '../../utils';
-import { Loading } from '../../components';
+import { BaseContainer, Loading, Input } from '../../components';
+import { fetchDataMovie } from '../../stores/actions/movie.action';
+
+const ListMovie = ({ movies }) => movies.map((data) => (
+  <View
+    key={data.id}
+    style={styles.users}
+  >
+    <Text style={styles.usersText}>
+      {data.id}. {data.title}
+    </Text>
+  </View>
+));
 
 const Movie = ({ movie }) => {
-  const { isLoading, movies } = movie;
   const dispatch = useDispatch();
-
-  const ListMovie = () => movies.map((data) => (
-    <View
-      key={data.id}
-      style={styles.users}
-    >
-      <Text style={styles.usersText}>
-        {data.id}. {data.title}
-      </Text>
-    </View>
-  ));
+  const [number, setNumber] = useState('');
+  const { isLoading, movies } = movie;
 
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor={Colors.whiteSmoke} />
-      <SafeAreaView style={styles.SafeAreaView1} />
-      <SafeAreaView style={styles.SafeAreaView2}>
+      <BaseContainer>
         <View style={styles.outerWrapper}>
           <Icon name="logo-youtube" size={100} color={Colors.red} />
           <View>
+            <Input
+              style={styles.input}
+              onChangeText={setNumber}
+              value={number}
+              placeholder="useless placeholder"
+              keyboardType="numeric"
+              returnKeyType="send"
+            />
             <TouchableOpacity
               style={styles.buttonStyle}
               onPress={() => (isLoading ? {} : dispatch(fetchDataMovie()))}
@@ -44,16 +50,15 @@ const Movie = ({ movie }) => {
                 <Text style={styles.text}>Click here to show Movie data:</Text>
                 : <Loading size="large" />}
             </TouchableOpacity>
-            <ListMovie />
+            <ListMovie movies={movies} />
           </View>
         </View>
-      </SafeAreaView>
+      </BaseContainer>
     </>
   );
 };
 
 const mapStateToProps = (state) => ({
-  user: state.userReducer.users,
   movie: state.movieReducer,
 });
 

@@ -36,4 +36,12 @@ export default StyleSheet.create({
     marginTop: 10,
   },
   usersText: { fontSize: 15 },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 10,
+    color: Colors.black,
+  },
 });

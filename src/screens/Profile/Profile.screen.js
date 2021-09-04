@@ -1,21 +1,19 @@
 import React from 'react';
 import {
-  SafeAreaView,
   View,
   Text,
-  StatusBar,
   TouchableOpacity,
   Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+
 import { Colors } from '../../utils';
 import styles from './Profile.style';
+import { BaseContainer } from '../../components';
 
 const Profile = ({ navigation }) => (
   <>
-    <StatusBar barStyle="dark-content" backgroundColor={Colors.whiteSmoke} />
-    <SafeAreaView style={styles.SafeAreaView1} />
-    <SafeAreaView style={styles.SafeAreaView2}>
+    <BaseContainer>
       <View style={styles.outerWrapper}>
         <Icon name="ios-settings" size={100} color={Colors.green} />
         <View>
@@ -39,7 +37,7 @@ const Profile = ({ navigation }) => (
       >
         <Text style={styles.authorText}>by Handi.dev</Text>
       </View>
-    </SafeAreaView>
+    </BaseContainer>
   </>
 );
 

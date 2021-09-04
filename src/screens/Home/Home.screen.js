@@ -1,38 +1,33 @@
 import React from 'react';
 import {
-  SafeAreaView,
   View,
   Text,
-  StatusBar,
   TouchableOpacity,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { connect, useDispatch } from 'react-redux';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 import styles from './Home.style';
-import { fetchDataUser } from '../../stores/actions/user.action';
 import { Colors } from '../../utils';
+import { BaseContainer } from '../../components';
+import { fetchDataUser } from '../../stores/actions/user.action';
 
-const Home = (params) => {
+const ListUser = ({ users }) => users.map((data) => (
+  <View
+    key={data.id}
+    style={styles.users}
+  >
+    <Text style={styles.usersText}>
+      {data.id}. {data.name}
+    </Text>
+  </View>
+));
+
+const Home = ({ users }) => {
   const dispatch = useDispatch();
-
-  function ListUser() {
-    return params.user.map((data) => (
-      <View
-        key={data.id}
-        style={styles.users}
-      >
-        <Text style={styles.usersText}>
-          {data.id}. {data.name}
-        </Text>
-      </View>
-    ));
-  }
-
   return (
     <>
-      <StatusBar translucent barStyle="dark-content" backgroundColor={Colors.gold} />
-      <SafeAreaView style={styles.SafeAreaView1} />
-      <SafeAreaView style={styles.SafeAreaView2}>
+      <BaseContainer>
         <View style={styles.outerWrapper}>
           <Icon name="ios-home" size={100} color={Colors.purplePastel} />
           <View>
@@ -42,16 +37,16 @@ const Home = (params) => {
             >
               <Text style={styles.text}>Click here to show User data:</Text>
             </TouchableOpacity>
-            <ListUser />
+            <ListUser users={users} />
           </View>
         </View>
-      </SafeAreaView>
+      </BaseContainer>
     </>
   );
 };
 
 const mapStateToProps = (state) => ({
-  user: state.userReducer.users,
+  users: state.userReducer.users,
 });
 
 export default connect(mapStateToProps, null)(Home);
