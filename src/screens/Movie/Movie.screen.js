@@ -9,7 +9,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import styles from './Movie.style';
 import { Colors } from '../../utils';
-import { BaseContainer, Loading, Input } from '../../components';
+import {
+  BaseContainer, Loading, AutoComplete,
+} from '../../components';
 import { fetchDataMovie } from '../../stores/actions/movie.action';
 
 const ListMovie = ({ movies }) => movies.map((data) => (
@@ -23,9 +25,20 @@ const ListMovie = ({ movies }) => movies.map((data) => (
   </View>
 ));
 
+const ListUsers = ({ users }) => users.map((data) => (
+  <View
+    key={data.id}
+    style={styles.users}
+  >
+    <Text style={styles.usersText}>
+      {data.id}. {data.login}
+    </Text>
+  </View>
+));
+
 const Movie = ({ movie }) => {
   const dispatch = useDispatch();
-  const [number, setNumber] = useState('');
+  const [users, setUsers] = useState([]);
   const { isLoading, movies } = movie;
 
   return (
@@ -34,14 +47,15 @@ const Movie = ({ movie }) => {
         <View style={styles.outerWrapper}>
           <Icon name="logo-youtube" size={100} color={Colors.red} />
           <View>
-            <Input
-              style={styles.input}
-              onChangeText={setNumber}
-              value={number}
-              placeholder="useless placeholder"
-              keyboardType="numeric"
-              returnKeyType="send"
+            <AutoComplete
+              apiUrl="https://api.github.com/users"
+              titleProperty="login"
+              textProperty="url"
+              onPressItem={(item) => {
+                setUsers([...users, item]);
+              }}
             />
+            <ListUsers users={users} />
             <TouchableOpacity
               style={styles.buttonStyle}
               onPress={() => (isLoading ? {} : dispatch(fetchDataMovie()))}

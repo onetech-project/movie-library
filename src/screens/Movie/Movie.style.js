@@ -2,18 +2,12 @@ import { StyleSheet, Dimensions } from 'react-native';
 import { Colors } from '../../utils';
 
 export default StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    paddingTop: 10,
-    paddingHorizontal: 10,
-  },
-  SafeAreaView1: { backgroundColor: Colors.white, flex: 0 },
-  SafeAreaView2: { flex: 1, backgroundColor: Colors.white },
   outerWrapper: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: Colors.white,
+    height: '100%',
   },
   buttonStyle: {
     backgroundColor: Colors.ee,
@@ -36,12 +30,4 @@ export default StyleSheet.create({
     marginTop: 10,
   },
   usersText: { fontSize: 15 },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 10,
-    color: Colors.black,
-  },
 });
