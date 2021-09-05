@@ -18,7 +18,7 @@ const BaseContainer: React.FC<Props> = (props) => (
       <ScrollView
         nestedScrollEnabled={true}
         style={styles.container}
-        contentContainerStyle={{ flexGrow: 1 }}
+        // contentContainerStyle={{ flexGrow: 1 }}
         keyboardShouldPersistTaps="handled">
         {props.children}
       </ScrollView>
@@ -29,7 +29,7 @@ const BaseContainer: React.FC<Props> = (props) => (
 const styles = StyleSheet.create({
   SafeAreaView1: { backgroundColor: Colors.white, flex: 0 },
   SafeAreaView2: { flex: 1, backgroundColor: Colors.white },
-  container: { flex: 1, backgroundColor: Colors.white, top: 30, borderWidth: 1 }
+  container: { flex: 1, backgroundColor: Colors.white, marginTop: 25 }
 });
 
 export default BaseContainer;

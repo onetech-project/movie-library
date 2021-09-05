@@ -55,15 +55,19 @@ const Movie = ({ movie }) => {
                 setUsers([...users, item]);
               }}
             />
+            {Array.from(Array(10).keys()).map(() => (
+              <TouchableOpacity
+                style={styles.buttonStyle}
+                onPress={() => (isLoading ? {} : dispatch(fetchDataMovie()))}
+              >
+                {!isLoading ?
+                  <Text style={styles.text}>Click here to show Movie data:</Text>
+                  : <Loading size="large" />}
+              </TouchableOpacity>
+
+            ))}
+
             <ListUsers users={users} />
-            <TouchableOpacity
-              style={styles.buttonStyle}
-              onPress={() => (isLoading ? {} : dispatch(fetchDataMovie()))}
-            >
-              {!isLoading ?
-                <Text style={styles.text}>Click here to show Movie data:</Text>
-                : <Loading size="large" />}
-            </TouchableOpacity>
             <ListMovie movies={movies} />
           </View>
         </View>

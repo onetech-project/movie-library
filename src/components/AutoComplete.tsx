@@ -34,7 +34,7 @@ const AutoComplete: React.FC<Props> = (props) => {
       if (input) {
         try {
           const result = await fetch(props.apiUrl).then(response => response.json());
-          setData(result.slice(0, 5));
+          setData(result.slice(0, 10));
         } catch (error) {
           console.log(error);
           setData([]);
@@ -71,6 +71,7 @@ const AutoComplete: React.FC<Props> = (props) => {
             textProperty: props.textProperty
           })}
           keyboardShouldPersistTaps="handled"
+          nestedScrollEnabled
         />
       )}
     </View>
@@ -82,9 +83,8 @@ const styles = StyleSheet.create({
     zIndex: 1,
     position: 'absolute',
     marginTop: 65,
-    backgroundColor: Colors.white,
     width: '100%',
-    paddingBottom: 10
+    maxHeight: 250,
   },
   AutoCompleteResultList: {
     backgroundColor: Colors.white,
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.whiteSmoke,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    elevation: 1,
+    elevation: 1
   },
   AutoCompleteResultItem: {
     padding: 10,
