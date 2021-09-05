@@ -5,9 +5,7 @@ export default StyleSheet.create({
   outerWrapper: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: Colors.white,
-    height: '100%',
   },
   buttonStyle: {
     backgroundColor: Colors.ee,

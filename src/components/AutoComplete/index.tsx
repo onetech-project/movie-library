@@ -3,19 +3,20 @@ import {
   View,
   Text,
   FlatList,
-  StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import Input, { InputProps } from './Input';
-import { Colors } from '../utils';
-import { connect } from 'react-redux'
+import Input, { InputProps } from '../Input';
+import Loading from '../Loading';
+import { Colors } from '../../utils';
+import { connect } from 'react-redux';
+import styles from './styles';
 
 interface Props extends InputProps {
   onPressItem?: (item: {}) => {},
   titleProperty: string,
   textProperty: string,
   apiUrl: string,
-  login: any,
+  login?: any,
 }
 
 const renderItems = ({ item, onPress, titleProperty, textProperty }) => (
@@ -25,19 +26,27 @@ const renderItems = ({ item, onPress, titleProperty, textProperty }) => (
   </TouchableOpacity>
 );
 
+const renderLoading = () => (
+  <Loading size="large" />
+)
+
 const AutoComplete: React.FC<Props> = (props) => {
   const [input, setInput] = useState('');
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       if (input) {
         try {
+          setLoading(true);
           const result = await fetch(props.apiUrl).then(response => response.json());
           setData(result.slice(0, 10));
+          setLoading(false);
         } catch (error) {
           console.log(error);
           setData([]);
+          setLoading(false);
         }
       }
     }, 1000);
@@ -48,6 +57,7 @@ const AutoComplete: React.FC<Props> = (props) => {
   return (
     <View>
       <Input
+        iconName='ios-search'
         placeholder={props.placeholder}
         value={input}
         onChangeText={setInput}
@@ -55,6 +65,11 @@ const AutoComplete: React.FC<Props> = (props) => {
         returnKeyType={props.returnKeyType}
         placeholderTextColor={Colors.grayNearWhite}
       />
+      {loading && (
+        <View style={styles.loading}>
+          {renderLoading()}
+        </View>
+      )}
       {data && data.length > 0 && (
         <FlatList
           style={styles.list}
@@ -77,42 +92,6 @@ const AutoComplete: React.FC<Props> = (props) => {
     </View>
   )
 };
-
-const styles = StyleSheet.create({
-  list: {
-    zIndex: 1,
-    position: 'absolute',
-    marginTop: 65,
-    width: '100%',
-    maxHeight: 250,
-  },
-  AutoCompleteResultList: {
-    backgroundColor: Colors.white,
-    marginHorizontal: 10,
-    borderWidth: 1,
-    borderColor: Colors.whiteSmoke,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    elevation: 1
-  },
-  AutoCompleteResultItem: {
-    padding: 10,
-    marginHorizontal: 10,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: Colors.whiteSmoke,
-  },
-  titleText: {
-    fontWeight: '600',
-    color: Colors.f3f,
-    marginTop: 5,
-    marginBottom: 3,
-    fontSize: 16
-  },
-  text: {
-    marginLeft: 2,
-    color: Colors.gray97
-  }
-});
 
 AutoComplete.defaultProps = {
   placeholder: 'Search',

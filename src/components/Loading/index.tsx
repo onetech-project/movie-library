@@ -2,7 +2,7 @@ import React from 'react';
 import {
   ActivityIndicator, View, ActivityIndicatorProps
 } from 'react-native';
-import { Colors } from '../utils';
+import { Colors } from '../../utils';
 
 interface Props extends ActivityIndicatorProps { }
 

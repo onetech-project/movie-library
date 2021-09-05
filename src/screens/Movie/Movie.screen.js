@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './Movie.style';
 import { Colors } from '../../utils';
 import {
-  BaseContainer, Loading, AutoComplete,
+  BaseContainer, Loading, AutoComplete, DatePicker,
 } from '../../components';
 import { fetchDataMovie } from '../../stores/actions/movie.action';
 
@@ -55,8 +55,9 @@ const Movie = ({ movie }) => {
                 setUsers([...users, item]);
               }}
             />
-            {Array.from(Array(10).keys()).map(() => (
+            {Array.from(Array(1).keys()).map((x) => (
               <TouchableOpacity
+                key={x.toString()}
                 style={styles.buttonStyle}
                 onPress={() => (isLoading ? {} : dispatch(fetchDataMovie()))}
               >
@@ -69,6 +70,7 @@ const Movie = ({ movie }) => {
 
             <ListUsers users={users} />
             <ListMovie movies={movies} />
+            <DatePicker />
           </View>
         </View>
       </BaseContainer>

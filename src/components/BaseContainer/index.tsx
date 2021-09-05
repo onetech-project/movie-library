@@ -2,11 +2,11 @@ import React from 'react';
 import {
   SafeAreaView,
   StatusBar,
-  StyleSheet,
   StatusBarProps,
   ScrollView,
 } from 'react-native';
-import { Colors } from '../utils';
+import { Colors } from '../../utils';
+import styles from './styles';
 
 interface Props extends StatusBarProps { }
 
@@ -18,18 +18,12 @@ const BaseContainer: React.FC<Props> = (props) => (
       <ScrollView
         nestedScrollEnabled={true}
         style={styles.container}
-        // contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={{ flexGrow: 1 }}
         keyboardShouldPersistTaps="handled">
         {props.children}
       </ScrollView>
     </SafeAreaView>
   </>
 );
-
-const styles = StyleSheet.create({
-  SafeAreaView1: { backgroundColor: Colors.white, flex: 0 },
-  SafeAreaView2: { flex: 1, backgroundColor: Colors.white },
-  container: { flex: 1, backgroundColor: Colors.white, marginTop: 25 }
-});
 
 export default BaseContainer;
