@@ -1,4 +1,4 @@
-import { getUser } from '../../api/fakeApiUser';
+import { getGithubUser } from '../../api/fakeApiUser';
 
 export const fetchUserRequest = () => ({
   type: 'FETCH_USER_REQUEST',
@@ -16,7 +16,7 @@ export const fetchUserFail = () => ({
 export const fetchDataUser = () => async (dispatch) => {
   try {
     dispatch(fetchUserRequest());
-    const { data } = await getUser();
+    const { data } = await getGithubUser();
     dispatch(fetchUserSuccess(data));
   } catch (error) {
     dispatch(fetchUserFail());

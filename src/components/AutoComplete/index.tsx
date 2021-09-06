@@ -10,6 +10,7 @@ import Loading from '../Loading';
 import { Colors } from '../../utils';
 import { connect } from 'react-redux';
 import styles from './styles';
+import axios from 'axios';
 
 interface Props extends InputProps {
   onPressItem?: (item: {}) => {},
@@ -40,8 +41,8 @@ const AutoComplete: React.FC<Props> = (props) => {
       if (input) {
         try {
           setLoading(true);
-          const result = await fetch(props.apiUrl).then(response => response.json());
-          setData(result.slice(0, 10));
+          const result = await axios.get(props.apiUrl);
+          setData(result.data.slice(0, 10));
           setLoading(false);
         } catch (error) {
           console.log(error);

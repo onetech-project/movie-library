@@ -4,49 +4,45 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import { connect, useDispatch } from 'react-redux';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { connect } from 'react-redux';
 
+import { FlatList } from 'react-native-gesture-handler';
 import styles from './Home.style';
-import { Colors } from '../../utils';
-import { BaseContainer } from '../../components';
-import { fetchDataUser } from '../../stores/actions/user.action';
+import { BaseContainer, Widget } from '../../components';
 
-const ListUser = ({ users }) => users.map((data) => (
-  <View
-    key={data.id}
-    style={styles.users}
-  >
-    <Text style={styles.usersText}>
-      {data.id}. {data.name}
-    </Text>
-  </View>
-));
-
-const Home = ({ users }) => {
-  const dispatch = useDispatch();
-  return (
-    <>
-      <BaseContainer>
-        <View style={styles.outerWrapper}>
-          <Icon name="ios-home" size={100} color={Colors.purplePastel} />
-          <View>
-            <TouchableOpacity
-              style={styles.buttonStyle}
-              onPress={() => dispatch(fetchDataUser())}
-            >
-              <Text style={styles.text}>Click here to show User data:</Text>
-            </TouchableOpacity>
-            <ListUser users={users} />
-          </View>
-        </View>
-      </BaseContainer>
-    </>
-  );
-};
+const Home = () => (
+  <>
+    <BaseContainer>
+      <TouchableOpacity style={styles.banner}>
+        <Text>Image</Text>
+      </TouchableOpacity>
+      <View style={styles.widgetInfoWrapper}>
+        <FlatList
+          data={Array.from(Array(8).keys())}
+          numColumns={4}
+          renderItem={({ item }) => (
+            <Widget style={styles.widgetInfo}>
+              <Text>{item}</Text>
+            </Widget>
+          )}
+        />
+      </View>
+      <View style={styles.widgetNewsWrapper}>
+        <FlatList
+          data={Array.from(Array(4).keys())}
+          renderItem={({ item }) => (
+            <Widget style={styles.widgetNews}>
+              <Text>{item}</Text>
+            </Widget>
+          )}
+        />
+      </View>
+    </BaseContainer>
+  </>
+);
 
 const mapStateToProps = (state) => ({
-  users: state.userReducer.users,
+  user: state.userReducer,
 });
 
 export default connect(mapStateToProps, null)(Home);

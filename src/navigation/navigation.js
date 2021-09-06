@@ -1,6 +1,7 @@
 import Profile from '../screens/Profile/Profile.screen';
 import Home from '../screens/Home/Home.screen';
 import Movie from '../screens/Movie/Movie.screen';
+import { Login } from '../screens';
 
 const tabNavigations = [
   {
@@ -26,6 +27,14 @@ const tabNavigations = [
   },
 ];
 
-const stackNavigations = [{}];
+const stackNavigations = [
+  {
+    name: 'Login',
+    component: Login.Views,
+    options: {
+      headerShown: false,
+    },
+  },
+];
 
 export { tabNavigations, stackNavigations };

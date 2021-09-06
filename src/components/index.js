@@ -3,6 +3,7 @@ import BaseContainer from './BaseContainer';
 import DatePicker from './DatePicker';
 import Input from './Input';
 import Loading from './Loading';
+import Widget from './Widget';
 
 export {
   BaseContainer,
@@ -10,4 +11,5 @@ export {
   Input,
   AutoComplete,
   DatePicker,
+  Widget,
 };
