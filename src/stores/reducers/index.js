@@ -1,13 +1,11 @@
 import { combineReducers } from 'redux';
-import { movieReducer } from './movie.reducer';
-import { userReducer } from './user.reducer';
-import { Login } from '../../screens';
+import { Login, Home, Movie } from '../../screens';
 // insert another reducers here to be combined
 
 const reducers = combineReducers({
-  userReducer,
-  movieReducer,
+  movieReducer: Movie.reducer,
   loginReducer: Login.reducer,
+  homeReducer: Home.reducer,
 });
 
 export default reducers;

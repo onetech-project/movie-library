@@ -1,30 +1,27 @@
 const initialState = {
-  movies: [],
+  users: [],
   isLoading: false,
-  error: null,
 };
 
-export const movieReducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
   const { payload } = action;
   switch (action.type) {
-    case 'FETCH_MOVIE_REQUEST':
+    case 'FETCH_USER_REQUEST':
       return {
         ...state,
         isLoading: true,
-        movies: [],
       };
 
-    case 'FETCH_MOVIE_SUCCESS':
+    case 'FETCH_USER_SUCCESS':
       return {
         ...state,
-        movies: payload,
+        users: payload,
         isLoading: false,
       };
-    case 'FETCH_MOVIE_FAILED':
+    case 'FETCH_USER_FAILED':
       return {
         ...state,
         isLoading: false,
-        error: payload,
       };
 
     default:

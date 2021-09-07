@@ -7,7 +7,7 @@ import {
 import { connect, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import styles from './Movie.style';
+import styles from './styles';
 import { Colors } from '../../utils';
 import {
   BaseContainer, Loading, AutoComplete, DatePicker,

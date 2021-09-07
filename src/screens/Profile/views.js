@@ -8,7 +8,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { Colors } from '../../utils';
-import styles from './Profile.style';
+import styles from './styles';
 import { BaseContainer } from '../../components';
 
 const Profile = ({ navigation }) => (

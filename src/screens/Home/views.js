@@ -7,7 +7,7 @@ import {
 import { connect } from 'react-redux';
 
 import { FlatList } from 'react-native-gesture-handler';
-import styles from './Home.style';
+import styles from './styles';
 import { BaseContainer, Widget } from '../../components';
 
 const Home = () => (

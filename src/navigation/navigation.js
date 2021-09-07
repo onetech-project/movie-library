@@ -1,7 +1,6 @@
 import Profile from '../screens/Profile/Profile.screen';
-import Home from '../screens/Home/Home.screen';
 import Movie from '../screens/Movie/Movie.screen';
-import { Login } from '../screens';
+import { Login, Home } from '../screens';
 
 const tabNavigations = [
   {

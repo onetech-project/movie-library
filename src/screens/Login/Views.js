@@ -6,9 +6,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
   Input, BaseContainer, Loading,
 } from '../../components';
-import Styles from './Styles';
+import Styles from './styles';
 import { Colors } from '../../utils';
-import { fetchDataLogin } from './Action';
+import { fetchDataLogin } from './action';
 
 const Login = ({ navigation, login }) => {
   const { isLoading, error, auth } = login;
