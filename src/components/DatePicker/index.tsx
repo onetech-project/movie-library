@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  Platform
+  Platform,
+  Pressable
 } from 'react-native';
 import Input, { InputProps } from '../Input';
-import Loading from '../Loading';
-import { Colors } from '../../utils';
-import { connect } from 'react-redux';
-import styles from './styles';
 import DateTimePicker, {
   BaseProps,
   IOSNativeProps,
@@ -19,7 +13,7 @@ import DateTimePicker, {
   TimePickerOptions,
   WindowsNativeProps,
 } from '@react-native-community/datetimepicker';
-import { Button } from 'react-native-vector-icons/Ionicons';
+import moment from 'moment';
 
 interface Props { }
 
@@ -30,46 +24,37 @@ const DatePicker: React.FC<
   & AndroidNativeProps
   & DatePickerOptions
   & TimePickerOptions
-  & WindowsNativeProps> = (props) => {
+  & WindowsNativeProps
+  & InputProps> = (props) => {
     const [date, setDate] = useState(new Date(1598051730000));
-    const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
-    const onChange = (event, selectedDate) => {
+    const onChange = (event: any, selectedDate: any) => {
       const currentDate = selectedDate || date;
       setShow(Platform.OS === 'ios');
       setDate(currentDate);
-    };
-
-    const showMode = (currentMode) => {
-      setShow(true);
-      setMode(currentMode);
-    };
-
-    const showDatepicker = () => {
-      showMode('date');
-    };
-
-    const showTimepicker = () => {
-      showMode('time');
+      props?.onChange?.(selectedDate);
     };
 
     return (
       <View>
-        <View>
-          <Button onPress={showDatepicker} title="Show date picker!" />
-        </View>
-        <View>
-          <Button onPress={showTimepicker} title="Show time picker!" />
-        </View>
+        <Pressable onPress={() => setShow(true)}>
+          <Input
+            iconName="ios-calendar"
+            placeholder="Select Date"
+            editable={false}
+            value={moment(date).format('DD MMMM YYYY')}
+          />
+        </Pressable>
         {show && (
           <DateTimePicker
             testID="dateTimePicker"
             value={date}
             mode="date"
             is24Hour={true}
-            display="default"
+            display={Platform.OS === 'ios' ? "default" : "calendar"}
             onChange={onChange}
+            {...props}
           />
         )}
       </View>

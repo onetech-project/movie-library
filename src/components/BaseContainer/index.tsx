@@ -8,7 +8,9 @@ import {
 import { Colors } from '../../utils';
 import styles from './styles';
 
-interface Props extends StatusBarProps { }
+interface Props extends StatusBarProps {
+  isLoading: boolean
+}
 
 const BaseContainer: React.FC<Props> = (props) => (
   <>
@@ -19,11 +21,16 @@ const BaseContainer: React.FC<Props> = (props) => (
         nestedScrollEnabled={true}
         style={styles.container}
         contentContainerStyle={{ flexGrow: 1 }}
-        keyboardShouldPersistTaps="handled">
+        keyboardShouldPersistTaps="handled"
+      >
         {props.children}
       </ScrollView>
     </SafeAreaView>
   </>
 );
+
+BaseContainer.defaultProps = {
+  isLoading: true
+}
 
 export default BaseContainer;

@@ -10,7 +10,7 @@ import styles from './styles';
 
 export interface InputProps extends TextInputProps {
   iconName?: string,
-  onIconPress?: () => {}
+  onIconPress?: any
 }
 
 const Input: React.FC<InputProps> = (props) => (

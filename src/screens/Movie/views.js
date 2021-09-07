@@ -10,9 +10,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import { Colors } from '../../utils';
 import {
-  BaseContainer, Loading, AutoComplete, DatePicker,
+  BaseContainer, Loading, AutoComplete, DatePicker, Picker,
 } from '../../components';
-import { fetchDataMovie } from '../../stores/actions/movie.action';
+import { fetchDataMovie } from './action';
 
 const ListMovie = ({ movies }) => movies.map((data) => (
   <View
@@ -40,6 +40,7 @@ const Movie = ({ movie }) => {
   const dispatch = useDispatch();
   const [users, setUsers] = useState([]);
   const { isLoading, movies } = movie;
+  const [selectedUser, setSelectedUser] = useState({});
 
   return (
     <>
@@ -55,6 +56,15 @@ const Movie = ({ movie }) => {
                 setUsers([...users, item]);
               }}
             />
+            <DatePicker />
+            <Picker
+              data={users}
+              onPressItem={setSelectedUser}
+              titleProperty="login"
+              textProperty="url"
+              placeholder="Select"
+              value={selectedUser.login}
+            />
             {Array.from(Array(1).keys()).map((x) => (
               <TouchableOpacity
                 key={x.toString()}
@@ -67,10 +77,8 @@ const Movie = ({ movie }) => {
               </TouchableOpacity>
 
             ))}
-
             <ListUsers users={users} />
             <ListMovie movies={movies} />
-            <DatePicker />
           </View>
         </View>
       </BaseContainer>

@@ -26,6 +26,11 @@ export const reducer = (state = initialState, action) => {
         error: payload,
       };
 
+    case 'LOGOUT':
+      return {
+        ...initialState,
+      };
+
     default:
       return state;
   }

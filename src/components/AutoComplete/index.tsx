@@ -42,7 +42,7 @@ const AutoComplete: React.FC<Props> = (props) => {
         try {
           setLoading(true);
           const result = await axios.get(props.apiUrl);
-          setData(result.data.slice(0, 10));
+          setData(result.data);
           setLoading(false);
         } catch (error) {
           console.log(error);
@@ -53,15 +53,18 @@ const AutoComplete: React.FC<Props> = (props) => {
     }, 1000);
 
     return () => clearTimeout(delayDebounceFn)
-  }, [input])
+  }, [input, props.apiUrl])
 
   return (
     <View>
       <Input
-        iconName='ios-search'
+        iconName="ios-search"
         placeholder={props.placeholder}
         value={input}
-        onChangeText={setInput}
+        onChangeText={(text) => {
+          setInput(text);
+          props.onChangeText?.(text);
+        }}
         keyboardType={props.keyboardType}
         returnKeyType={props.returnKeyType}
         placeholderTextColor={Colors.grayNearWhite}
