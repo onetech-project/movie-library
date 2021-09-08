@@ -12,7 +12,7 @@ import { Colors } from '../utils';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const tabComponents = () => {
+const tabComponents = ({ navigation }) => {
   const [canClose, setCanClose] = useState(false);
   useEffect(() => {
     if (Platform.OS === 'android') {
@@ -21,6 +21,7 @@ const tabComponents = () => {
   }, [canClose]);
 
   const backHandler = () => {
+    if (!navigation.isFocused()) return false;
     if (canClose) {
       BackHandler.removeEventListener('hardwareBackPress');
       BackHandler.exitApp();
