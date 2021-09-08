@@ -75,6 +75,9 @@
     "xml2js": "^0.4.23"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(@react-native|@react-native(-community)|react-native|react-native-vector-icons)/)"
+    ]
   }
 }

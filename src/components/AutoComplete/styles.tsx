@@ -48,5 +48,11 @@ export default StyleSheet.create({
   text: {
     marginLeft: 2,
     color: Colors.gray97
+  },
+  selectedList: {
+    flexDirection: 'row',
+    marginHorizontal: 0,
+    marginBottom: 10,
+    marginTop: -10
   }
 });

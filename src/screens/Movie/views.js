@@ -52,9 +52,10 @@ const Movie = ({ movie }) => {
               apiUrl="https://api.github.com/users"
               titleProperty="login"
               textProperty="url"
-              onPressItem={(item) => {
-                setUsers([...users, item]);
-              }}
+              // onPressItem={(item) => {
+              //   setUsers([...users, item]);
+              // }}
+              getSelected={(seleted) => setUsers(seleted)}
             />
             <DatePicker />
             <Picker

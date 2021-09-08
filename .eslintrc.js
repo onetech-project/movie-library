@@ -27,8 +27,12 @@ module.exports = {
     'linebreak-style': 0,
     'no-console': 'error',
   },
+  env: {
+    'jest/globals': true,
+  },
   plugins: [
     'react',
     'react-native',
+    'jest',
   ],
 };

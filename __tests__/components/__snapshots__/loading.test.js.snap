@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test Input Component should render Input component 1`] = `
+<View>
+  <ActivityIndicator
+    color="#ed1b2e"
+    size="small"
+  />
+</View>
+`;

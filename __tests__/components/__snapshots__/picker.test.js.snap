@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test Input Component should render Input component 1`] = `
+<View>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+  >
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#ffffff",
+          "flexDirection": "row",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <TextInput
+        editable={false}
+        iconName="ios-caret-down"
+        placeholder="testing"
+        placeholderTextColor="#dddddd"
+        style={
+          Object {
+            "alignSelf": "stretch",
+            "backgroundColor": "#ffffff",
+            "borderBottomRightRadius": 0,
+            "borderColor": "#f5f5f5",
+            "borderRadius": 3,
+            "borderRightWidth": 0,
+            "borderTopRightRadius": 0,
+            "borderWidth": 1,
+            "color": "#000000",
+            "elevation": 1,
+            "flex": 8,
+            "marginBottom": 10,
+            "padding": 10,
+          }
+        }
+        value=""
+      />
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": "#dddddd",
+              "fontSize": 20,
+            },
+            Object {
+              "backgroundColor": "#ffffff",
+              "borderBottomLeftRadius": 0,
+              "borderColor": "#f5f5f5",
+              "borderLeftWidth": 0,
+              "borderRadius": 3,
+              "borderTopLeftRadius": 0,
+              "borderWidth": 1,
+              "elevation": 1,
+              "flex": 1,
+              "marginBottom": 10,
+              "paddingLeft": 0,
+              "paddingTop": 15,
+            },
+            Object {
+              "fontFamily": "Ionicons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+  </View>
+</View>
+`;
