@@ -5,6 +5,7 @@ import Input from './Input';
 import Loading from './Loading';
 import Widget from './Widget';
 import Picker from './Picker';
+import Upload from './Upload';
 
 export {
   BaseContainer,
@@ -14,4 +15,5 @@ export {
   DatePicker,
   Widget,
   Picker,
+  Upload,
 };

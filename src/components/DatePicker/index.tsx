@@ -14,6 +14,7 @@ import DateTimePicker, {
   WindowsNativeProps,
 } from '@react-native-community/datetimepicker';
 import moment from 'moment';
+import { GlobalStyles } from '../../utils';
 
 interface Props { }
 
@@ -37,7 +38,7 @@ const DatePicker: React.FC<
     };
 
     return (
-      <View>
+      <View style={GlobalStyles.fullWidth}>
         <Pressable onPress={() => setShow(true)}>
           <Input
             iconName="ios-calendar"

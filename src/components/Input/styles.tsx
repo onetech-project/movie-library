@@ -1,7 +1,5 @@
-import {
-  StyleSheet
-} from 'react-native';
-import { Colors } from '../../utils';
+import { StyleSheet } from 'react-native';
+import { Colors, GlobalStyles } from '../../utils';
 
 export default StyleSheet.create({
   input: {
@@ -26,6 +24,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     backgroundColor: Colors.white,
+    // ...GlobalStyles.fullWidth
   },
   icon: {
     flex: 1,

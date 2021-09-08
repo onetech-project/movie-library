@@ -7,7 +7,7 @@ import {
   Pressable,
 } from 'react-native';
 import Input, { InputProps } from '../Input';
-import { Colors } from '../../utils';
+import { Colors, GlobalStyles } from '../../utils';
 import styles from './styles';
 
 interface Props extends InputProps {
@@ -33,8 +33,8 @@ const Picker: React.FC<Props> = (props) => {
   }, [])
 
   return (
-    <View>
-      <Pressable onPress={() => setShow(true)}>
+    <View style={GlobalStyles.fullWidth}>
+      <Pressable onPress={() => setShow(props.data.length > 0 ? true : false)}>
         <Input
           iconName="ios-caret-down"
           placeholder={props.placeholder}

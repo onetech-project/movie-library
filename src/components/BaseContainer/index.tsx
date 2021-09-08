@@ -20,7 +20,7 @@ const BaseContainer: React.FC<Props> = (props) => (
       <ScrollView
         nestedScrollEnabled={true}
         style={styles.container}
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={styles.contentContainer}
         keyboardShouldPersistTaps="handled"
       >
         {props.children}

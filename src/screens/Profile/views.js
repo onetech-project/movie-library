@@ -40,6 +40,7 @@ const Profile = () => {
           style={styles.author}
         >
           <Text style={styles.authorText}>by Handi.dev</Text>
+          <Text style={styles.authorText}>develop by Faris.B</Text>
         </View>
       </BaseContainer>
     </>

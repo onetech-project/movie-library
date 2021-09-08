@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import Input, { InputProps } from '../Input';
 import Loading from '../Loading';
-import { Colors } from '../../utils';
+import { Colors, GlobalStyles } from '../../utils';
 import { connect } from 'react-redux';
 import styles from './styles';
 import axios from 'axios';
@@ -73,7 +73,7 @@ const AutoComplete: React.FC<Props> = (props) => {
   }, [selected])
 
   return (
-    <View>
+    <View style={GlobalStyles.fullWidth}>
       <Input
         iconName="ios-search"
         placeholder={props.placeholder}
