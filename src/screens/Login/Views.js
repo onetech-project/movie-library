@@ -8,18 +8,14 @@ import {
 } from '../../components';
 import Styles from './styles';
 import { Colors } from '../../utils';
-import { fetchDataLogin } from './action';
+import { fetchDataLogin } from '../../stores/actions';
 
-const Login = ({ navigation, login }) => {
-  const { isLoading, error, auth } = login;
+const Login = ({ login }) => {
+  const { isLoading, error } = login;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (auth) navigation.navigate('HomeBase');
-  }, [auth]);
 
   useEffect(() => {
     if (error) Alert.alert('', error, [{ text: 'Ok' }]);
@@ -60,7 +56,7 @@ const Login = ({ navigation, login }) => {
 };
 
 const mapStateToProps = (state) => ({
-  login: state.loginReducer,
+  login: state.authReducer,
 });
 
 export default connect(mapStateToProps, null)(Login);

@@ -1,45 +1,18 @@
 import React, { useState } from 'react';
 import {
   View,
-  Text,
-  TouchableOpacity,
 } from 'react-native';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import styles from './styles';
 import { Colors } from '../../utils';
 import {
-  BaseContainer, Loading, AutoComplete, DatePicker, Picker,
+  BaseContainer, AutoComplete, DatePicker, Picker, Upload,
 } from '../../components';
-import { fetchDataMovie } from './action';
 
-const ListMovie = ({ movies }) => movies.map((data) => (
-  <View
-    key={data.id}
-    style={styles.users}
-  >
-    <Text style={styles.usersText}>
-      {data.id}. {data.title}
-    </Text>
-  </View>
-));
-
-const ListUsers = ({ users }) => users.map((data) => (
-  <View
-    key={data.id}
-    style={styles.users}
-  >
-    <Text style={styles.usersText}>
-      {data.id}. {data.login}
-    </Text>
-  </View>
-));
-
-const Movie = ({ movie }) => {
-  const dispatch = useDispatch();
+const Movie = () => {
   const [users, setUsers] = useState([]);
-  const { isLoading, movies } = movie;
   const [selectedUser, setSelectedUser] = useState({});
 
   return (
@@ -52,9 +25,6 @@ const Movie = ({ movie }) => {
               apiUrl="https://api.github.com/users"
               titleProperty="login"
               textProperty="url"
-              // onPressItem={(item) => {
-              //   setUsers([...users, item]);
-              // }}
               getSelected={(seleted) => setUsers(seleted)}
             />
             <DatePicker />
@@ -66,7 +36,8 @@ const Movie = ({ movie }) => {
               placeholder="Select"
               value={selectedUser.login}
             />
-            {Array.from(Array(1).keys()).map((x) => (
+            <Upload />
+            {/* {Array.from(Array(1).keys()).map((x) => (
               <TouchableOpacity
                 key={x.toString()}
                 style={styles.buttonStyle}
@@ -77,9 +48,9 @@ const Movie = ({ movie }) => {
                   : <Loading size="large" />}
               </TouchableOpacity>
 
-            ))}
-            <ListUsers users={users} />
-            <ListMovie movies={movies} />
+            ))} */}
+            {/* <ListUsers users={users} /> */}
+            {/* <ListMovie movies={movies} /> */}
           </View>
         </View>
       </BaseContainer>

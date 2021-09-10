@@ -6,7 +6,6 @@ import * as Progress from 'react-native-progress';
 import { FlatList } from 'react-native-gesture-handler';
 import styles from './styles';
 import { pickFile } from './utils';
-import { connect } from 'react-redux';
 
 interface Props {
   onPressUpload?: Function,
@@ -26,7 +25,7 @@ const Upload: React.FC<Props> = (props) => {
   const [files, setFiles] = useState([]);
 
   const handlePickFile = () => {
-    pickFile({ onPicked: (res: any) => { setFiles([...files, res]) }, token: props.token });
+    pickFile({ onPicked: (res: any) => { setFiles([...files, res]) } });
   }
 
   return (
@@ -42,7 +41,9 @@ const Upload: React.FC<Props> = (props) => {
             <Icon style={styles.fileIcon} name="ios-document" size={25} color={Colors.gray70} />
             <View style={styles.fileInfo}>
               <Text style={styles.fileName}>{item.name}</Text>
-              <Progress.Bar progress={item.percentCompleted} width={null} style={styles.progressBar} color={Colors.red} />
+              {item.percentCompleted && item.percentCompleted < 100 && (
+                <Progress.Bar progress={item.percentCompleted} width={null} style={styles.progressBar} color={Colors.red} />
+              )}
             </View>
             <View style={styles.action}>
               <Icon name="ios-eye" size={20} color={Colors.gray70} onPress={props.onPressPreview} />
@@ -67,8 +68,4 @@ Upload.defaultProps = {
   onUploaded: () => { },
 };
 
-const mapStateToProps = (state: any) => ({
-  token: state.loginReducer.auth?.access_token,
-})
-
-export default connect(mapStateToProps, null)(Upload);
+export default Upload;

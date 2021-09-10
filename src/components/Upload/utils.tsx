@@ -1,11 +1,9 @@
-import axios from 'axios';
 import DocumentPicker from 'react-native-document-picker';
-
+import { HttpHelper } from '../../utils';
 interface PickFileProps {
   onPicked?: Function,
   onCancel?: Function,
   onFailed?: Function,
-  token?: string,
 }
 
 export const pickFile = async (props: PickFileProps) => {
@@ -19,7 +17,6 @@ export const pickFile = async (props: PickFileProps) => {
       file: file[0],
       onUploadProgress: (progress: any) => props.onPicked?.(progress),
       onSuccess: (data: any) => props.onPicked?.(data),
-      token: props.token
     })
   } catch (err) {
     if (DocumentPicker.isCancel(err)) {
@@ -42,7 +39,6 @@ export const pickMultipleFile = async (props: PickFileProps) => {
         file,
         onUploadProgress: (progress: any) => props.onPicked?.(progress),
         onSuccess: (data: any) => props.onPicked?.(data),
-        token: props.token
       })
     }
   } catch (err) {
@@ -60,11 +56,10 @@ interface UploadToServerProps {
   onSuccess?: Function,
   onError?: Function,
   file: any
-  token: string,
 }
 
 export const uploadToServer = async (props: UploadToServerProps) => {
-  var data = new FormData();
+  const data = new FormData();
   data.append('file', {
     uri: props.file.uri,
     name: props.file.name,
@@ -72,18 +67,15 @@ export const uploadToServer = async (props: UploadToServerProps) => {
   });
   console.log(data);
 
-  let config = {
-    onUploadProgress: function (progressEvent: any) {
+  const config = {
+    onUploadProgress: (progressEvent: any) => {
       const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
       props.onUploadProgress?.({ percentCompleted, ...props.file });
     },
-    headers: {
-      Authorization: `Beare ${props.token}`
-    }
   };
 
   try {
-    const result = await axios.post(props.url, data, { headers: config });
+    const result = await HttpHelper.post(props.url, data, {}, config);
     props.onSuccess?.({ ...result.data, percentCompleted: 100, ...props.file });
   } catch (error) {
     console.log(error);

@@ -13,18 +13,12 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: Colors.whiteSmoke,
     elevation: 2,
+    marginLeft: 10
   },
   loading: {
-    zIndex: 99,
-    position: 'absolute',
-    marginTop: 52,
-    height: 250,
-    width: '100%',
-    borderWidth: 1,
-    borderColor: Colors.whiteSmoke,
-    elevation: 2,
     backgroundColor: Colors.white,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    height: 250
   },
   AutoCompleteResultList: {
     backgroundColor: Colors.white,

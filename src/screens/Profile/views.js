@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { Colors } from '../../utils';
 import styles from './styles';
 import { BaseContainer } from '../../components';
-import { logout } from './action';
+import { logout } from '../../stores/actions';
 
 const Profile = () => {
   const dispatch = useDispatch();

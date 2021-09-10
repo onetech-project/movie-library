@@ -7,13 +7,14 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { BackHandler, Platform, ToastAndroid } from 'react-native';
 import { connect } from 'react-redux';
 import { tabNavigations, stackNavigations } from './navigation';
-import { Colors } from '../utils';
+import { Colors, HttpHelper } from '../utils';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const tabComponents = ({ navigation }) => {
   const [canClose, setCanClose] = useState(false);
+
   useEffect(() => {
     if (Platform.OS === 'android') {
       BackHandler.addEventListener('hardwareBackPress', backHandler);
@@ -52,31 +53,36 @@ const tabComponents = ({ navigation }) => {
   );
 };
 
-const MainNavigation = ({ login }) => (
-  <NavigationContainer>
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {stackNavigations.filter((x) => (login?.auth ? !x.public : x.public)).map(({ component, name, options }) => (
-        <Stack.Screen
-          key={name}
-          name={name}
-          options={options}
-          component={component}
-        />
-      ))}
-      {login?.auth && (
-        <Stack.Screen
-          name="HomeBase"
-          options={{ headerShown: false }}
-          component={tabComponents}
-        />
-      )}
-      {/* add your another screen here using -> Stack.Screen */}
-    </Stack.Navigator>
-  </NavigationContainer>
-);
+const MainNavigation = ({ login }) => {
+  useEffect(() => {
+    HttpHelper.setToken(login?.auth?.access_token);
+  });
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {stackNavigations.filter((x) => (login?.auth ? !x.public : x.public)).map(({ component, name, options }) => (
+          <Stack.Screen
+            key={name}
+            name={name}
+            options={options}
+            component={component}
+          />
+        ))}
+        {login?.auth && (
+          <Stack.Screen
+            name="HomeBase"
+            options={{ headerShown: false }}
+            component={tabComponents}
+          />
+        )}
+        {/* add your another screen here using -> Stack.Screen */}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
 const mapStateToProps = (state) => ({
-  login: state.loginReducer,
+  login: state.authReducer,
 });
 
 export default connect(mapStateToProps, null)(MainNavigation);

@@ -11,5 +11,7 @@ Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 const baseStyle = Text.defaultProps?.style || {};
 Text.defaultProps.style = { ...baseStyle, fontFamily: Fonts.frutiger };
+Text.defaultProps.lineBreakMode = 'clip';
+Text.defaultProps.numberOfLines = 1;
 
 AppRegistry.registerComponent(appName, () => SuperApp);

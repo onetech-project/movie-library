@@ -7,10 +7,8 @@ import {
 } from 'react-native';
 import Input, { InputProps } from '../Input';
 import Loading from '../Loading';
-import { Colors, GlobalStyles } from '../../utils';
-import { connect } from 'react-redux';
+import { Colors, GlobalStyles, HttpHelper } from '../../utils';
 import styles from './styles';
-import axios from 'axios';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface Props extends InputProps {
@@ -54,7 +52,7 @@ const AutoComplete: React.FC<Props> = (props) => {
       if (input) {
         try {
           setLoading(true);
-          const result = await axios.get(props.apiUrl);
+          const result = await HttpHelper.get(props.apiUrl);
           setData(result.data);
           setLoading(false);
         } catch (error) {
@@ -87,7 +85,7 @@ const AutoComplete: React.FC<Props> = (props) => {
         placeholderTextColor={Colors.grayNearWhite}
       />
       {loading && (
-        <View style={styles.loading}>
+        <View style={[styles.list, styles.loading]}>
           {renderLoading()}
         </View>
       )}
@@ -132,8 +130,4 @@ AutoComplete.defaultProps = {
   getSelected: () => []
 };
 
-const mapStateToProps = (state: any) => ({
-  login: state.login,
-})
-
-export default connect(mapStateToProps, null)(AutoComplete);
+export default AutoComplete;

@@ -1,7 +1,7 @@
 import * as constant from './constant';
-import * as loginAPI from './loginAPI';
+import * as authAPI from './auth';
 
 export default {
   ...constant,
-  ...loginAPI,
+  ...authAPI,
 };

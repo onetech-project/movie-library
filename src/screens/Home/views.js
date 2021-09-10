@@ -42,7 +42,7 @@ const Home = () => (
 );
 
 const mapStateToProps = (state) => ({
-  user: state.userReducer,
+  auth: state.authReducer,
 });
 
 export default connect(mapStateToProps, null)(Home);
