@@ -6,6 +6,7 @@ import Loading from './Loading';
 import Widget from './Widget';
 import Picker from './Picker';
 import Upload from './Upload';
+import Accordion from './Accordion';
 
 export {
   BaseContainer,
@@ -16,4 +17,5 @@ export {
   Widget,
   Picker,
   Upload,
+  Accordion,
 };

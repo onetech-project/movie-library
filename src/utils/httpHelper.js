@@ -1,43 +1,33 @@
 import axios from 'axios';
+import { refreshUrl } from '../api/constant';
 
-let authToken = null;
+const instance = axios.create();
 
-const setToken = (token) => { authToken = token; };
+let refreshToken = null;
 
-const get = (url, headers = {}, config = {}) => axios.get(url, {
-  ...config,
-  headers: {
-    // Authorization: `Bearer ${authToken}`,
-    'Content-type': 'application/json',
-    ...headers,
-  },
-});
+const setToken = (auth) => {
+  instance.defaults.headers.common.Authorization = auth?.token ? `Bearer ${auth.token}` : null;
+  refreshToken = auth?.refresh_token;
+};
 
-const post = (url, data, headers = {}, config = {}) => axios.post(url, data, {
-  ...config,
-  headers: {
-    Authorization: `Bearer ${authToken}`,
-    'Content-type': 'application/json',
-    ...headers,
-  },
-});
+const get = (url, config = {}) => instance.get(url, config);
+const post = (url, data, config = {}) => instance.post(url, data, config);
+const put = (url, data, config = {}) => instance.put(url, data, config);
+const remove = (url, config = {}) => instance.delete(url, config);
 
-const put = (url, data, headers = {}, config = {}) => axios.put(url, data, {
-  ...config,
-  headers: {
-    Authorization: `Bearer ${authToken}`,
-    'Content-type': 'application/json',
-    ...headers,
-  },
-});
-
-const remove = (url, headers = {}, config = {}) => axios.delete(url, {
-  ...config,
-  headers: {
-    Authorization: `Bearer ${authToken}`,
-    'Content-type': 'application/json',
-    ...headers,
-  },
+instance.interceptors.response.use((response) => response, async (error) => {
+  try {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest.isRetry) {
+      originalRequest.isRetry = true;
+      const { data } = await instance.post(refreshUrl, { refreshToken });
+      instance.defaults.headers.common.Authorization = `Bearer ${data.data.access_token}`;
+      return instance(originalRequest);
+    }
+    return Promise.reject(error);
+  } catch (e) {
+    return Promise.reject(e);
+  }
 });
 
 export default {

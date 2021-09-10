@@ -1,4 +1,5 @@
 import DocumentPicker from 'react-native-document-picker';
+import api from '../../api';
 import { HttpHelper } from '../../utils';
 interface PickFileProps {
   onPicked?: Function,
@@ -11,12 +12,17 @@ export const pickFile = async (props: PickFileProps) => {
   try {
     const file = await DocumentPicker.pick({
       type: [doc, docx, xls, xlsx, pdf, ppt, pptx],
+      allowMultiSelection: false
     });
+    props.onPicked({ ...file[0], status: 'uploading' })
     await uploadToServer({
-      url: 'https://api.imgur.com/3/image',
+      url: api.partnershipsAttachment,
       file: file[0],
-      onUploadProgress: (progress: any) => props.onPicked?.(progress),
-      onSuccess: (data: any) => props.onPicked?.(data),
+      onUploadProgress: (progress: any) => {
+        // props.onPicked?.(progress)
+      },
+      onSuccess: (data: any) => props.onPicked(data),
+      onError: (data: any) => props.onPicked(data),
     })
   } catch (err) {
     if (DocumentPicker.isCancel(err)) {
@@ -35,10 +41,13 @@ export const pickMultipleFile = async (props: PickFileProps) => {
     });
     for (const file of files) {
       await uploadToServer({
-        url: 'https://api.imgur.com/3/image',
+        url: api.partnershipsAttachment,
         file,
-        onUploadProgress: (progress: any) => props.onPicked?.(progress),
-        onSuccess: (data: any) => props.onPicked?.(data),
+        onUploadProgress: (progress: any) => {
+          // props.onPicked?.(progress)
+        },
+        onSuccess: (data: any) => props.onPicked(data),
+        onError: (data: any) => props.onPicked(data),
       })
     }
   } catch (err) {
@@ -65,20 +74,21 @@ export const uploadToServer = async (props: UploadToServerProps) => {
     name: props.file.name,
     type: props.file.type
   });
-  console.log(data);
 
   const config = {
-    onUploadProgress: (progressEvent: any) => {
-      const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+    onUploadProgress: (event: any) => {
+      const percentCompleted = Math.round((event.loaded * 100) / event.total);
       props.onUploadProgress?.({ percentCompleted, ...props.file });
     },
+    headers: {
+      'Content-type': 'multipart/form-data'
+    }
   };
 
   try {
-    const result = await HttpHelper.post(props.url, data, {}, config);
-    props.onSuccess?.({ ...result.data, percentCompleted: 100, ...props.file });
+    const result = await HttpHelper.post(props.url, data, config);
+    props.onSuccess?.({ ...result.data.data, ...props.file, status: 'success' });
   } catch (error) {
-    console.log(error);
-    props.onError?.(error);
+    props.onError?.({ error, ...props.file, status: 'failed' });
   }
 };

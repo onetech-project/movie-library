@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Text,
   View,
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -8,7 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import { Colors } from '../../utils';
 import {
-  BaseContainer, AutoComplete, DatePicker, Picker, Upload,
+  BaseContainer, AutoComplete, DatePicker, Picker, Upload, Accordion,
 } from '../../components';
 
 const Movie = () => {
@@ -37,6 +38,15 @@ const Movie = () => {
               value={selectedUser.login}
             />
             <Upload />
+            <Accordion title="Accordion Empty" />
+            <Accordion>
+              {[...new Array(10)].map(() => (
+                <View>
+
+                  <Text>TEST</Text>
+                </View>
+              ))}
+            </Accordion>
             {/* {Array.from(Array(1).keys()).map((x) => (
               <TouchableOpacity
                 key={x.toString()}

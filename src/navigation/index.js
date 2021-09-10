@@ -55,7 +55,7 @@ const tabComponents = ({ navigation }) => {
 
 const MainNavigation = ({ login }) => {
   useEffect(() => {
-    HttpHelper.setToken(login?.auth?.access_token);
+    HttpHelper.setToken(login?.auth);
   });
   return (
     <NavigationContainer>

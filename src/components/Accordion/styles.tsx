@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { Colors, GlobalStyles } from '../../utils';
 
 export default StyleSheet.create({
-  container: { ...GlobalStyles.fullWidth },
+  container: { ...GlobalStyles.fullWidth, marginTop: 10 },
   header: {
     flexDirection: 'row',
     borderColor: Colors.red,
@@ -10,8 +10,7 @@ export default StyleSheet.create({
     backgroundColor: Colors.white,
     paddingHorizontal: 20,
     paddingVertical: 10,
-    borderTopEndRadius: 20,
-    borderTopStartRadius: 20
+    elevation: 1
   },
   list: {
     borderColor: Colors.red,
@@ -20,7 +19,6 @@ export default StyleSheet.create({
   },
   title: { alignSelf: 'center', flex: 7, fontSize: 15 },
   itemContainer: {
-    flexDirection: 'row',
     padding: 20,
     backgroundColor: Colors.white
   },
@@ -32,5 +30,5 @@ export default StyleSheet.create({
   progressBar: { width: '100%', flex: 1 },
   action: { flex: 2, alignItems: 'center', justifyContent: 'space-evenly', flexDirection: 'row' },
   errorMessage: { fontSize: 10 },
-  listEmpty: { alignContent: 'center', justifyContent: 'center' }
+  contentEmpty: { alignItems: 'center' }
 })
