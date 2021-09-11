@@ -18,7 +18,7 @@ const Login = ({ login }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (error) Alert.alert('', error, [{ text: 'Ok', style: { color: Colors.white } }]);
+    if (error) Alert.alert('', error, [{ text: 'Ok', style: 'default' }]);
     return dispatch(logout());
   }, [error]);
 
