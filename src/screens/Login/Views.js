@@ -8,7 +8,7 @@ import {
 } from '../../components';
 import Styles from './styles';
 import { Colors } from '../../utils';
-import { fetchDataLogin } from '../../stores/actions';
+import { fetchDataLogin, logout } from '../../stores/actions';
 
 const Login = ({ login }) => {
   const { isLoading, error } = login;
@@ -18,7 +18,8 @@ const Login = ({ login }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (error) Alert.alert('', error, [{ text: 'Ok' }]);
+    if (error) Alert.alert('', error, [{ text: 'Ok', style: { color: Colors.white } }]);
+    return dispatch(logout());
   }, [error]);
 
   const handleLogin = () => {
@@ -28,7 +29,11 @@ const Login = ({ login }) => {
   return (
     <BaseContainer>
       <View style={Styles.container}>
-        <Icon name="ios-home" size={100} color={Colors.blue} />
+        <Icon
+          name="ios-home"
+          size={100}
+          color={Colors.blue}
+        />
         <View>
           <Input
             placeholder="Username"
