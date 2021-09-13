@@ -3,9 +3,9 @@ import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../../utils';
 import * as Progress from 'react-native-progress';
-import { FlatList } from 'react-native-gesture-handler';
 import styles from './styles';
-import { pickFile } from './utils';
+import { pickFile, uploadToServer } from './utils';
+import api from '../../api';
 
 interface Props {
   onPressUpload?: any,
@@ -32,6 +32,22 @@ const Upload: React.FC<Props> = (props) => {
     });
   }
 
+  const retry = (item: any, index: any) => {
+    const file = {
+      uri: item.uri,
+      name: item.name,
+      type: item.type
+    };
+    const filtered = files.filter((x, i) => i !== index);
+    setFiles([...filtered, file]);
+    uploadToServer({
+      url: api.partnershipsAttachment,
+      file,
+      onSuccess: (res: any) => setFiles([...filtered, res]),
+      onError: (res: any) => setFiles([...filtered, res])
+    })
+  }
+
   const handlePreview = (item: any) => {
 
   }
@@ -52,16 +68,14 @@ const Upload: React.FC<Props> = (props) => {
         <Text style={styles.title}>{props.title}</Text>
         <Icon name="ios-cloud-upload" size={25} color={Colors.red} onPress={handlePickFile} />
       </View>
-      <FlatList
-        data={files}
-        style={styles.list}
-        ListEmptyComponent={() => (
+      <View style={styles.list}>
+        {files.length === 0 && (
           <View style={[styles.itemContainer, styles.listEmpty]}>
             <Icon size={25} name="ios-close-circle" color={Colors.gray70} />
           </View>
         )}
-        renderItem={({ item }) => (
-          <View style={[styles.itemContainer]}>
+        {files.map((item, index) => (
+          <View key={index.toString()} style={[styles.itemContainer]}>
             <Icon style={[styles.fileIcon, item?._id ? styles.fileIconSuccess : styles.fileIconFailed]} name="ios-document" size={25} />
             <View style={styles.fileInfo}>
               <Text style={styles.fileName}>{item?.name}</Text>
@@ -74,16 +88,19 @@ const Upload: React.FC<Props> = (props) => {
             </View>
             {item?._id && (
               <View style={styles.action}>
-                <>
-                  <Icon name="ios-eye" size={20} color={Colors.gray70} onPress={() => handlePreview(item)} />
-                  <Icon name="ios-save" size={20} color={Colors.gray70} onPress={() => handleDownload(item)} />
-                  <Icon name="ios-trash-bin" size={20} color={Colors.gray70} onPress={() => handleDelete(item)} />
-                </>
+                <Icon name="ios-eye" size={20} color={Colors.gray70} onPress={() => handlePreview(item)} />
+                <Icon name="ios-save" size={20} color={Colors.gray70} onPress={() => handleDownload(item)} />
+                <Icon name="ios-trash-bin" size={20} color={Colors.gray70} onPress={() => handleDelete(item)} />
+              </View>
+            )}
+            {item?.error && (
+              <View style={[styles.action, styles.retry]}>
+                <Icon name="ios-reload-circle" size={30} onPress={() => retry(item, index)} />
               </View>
             )}
           </View>
-        )}
-      />
+        ))}
+      </View>
     </View>
   )
 }

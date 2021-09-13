@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 // eslint-disable-next-line react-native/split-platform-components
 import { BackHandler, Platform, ToastAndroid } from 'react-native';
 import { connect } from 'react-redux';
-import { tabNavigations, stackNavigations } from './navigation';
+import { tabNavigations, stackNavigations, ErrorScreen } from './navigation';
 import { Colors, HttpHelper } from '../utils';
 
 const Stack = createStackNavigator();
@@ -53,36 +53,39 @@ const tabComponents = ({ navigation }) => {
   );
 };
 
-const MainNavigation = ({ login }) => {
+const MainNavigation = ({ auth }) => {
   useEffect(() => {
-    HttpHelper.setToken(login?.auth);
+    HttpHelper.setToken(auth);
+    // throw new Error('I Crashed');
   });
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {stackNavigations.filter((x) => (login?.auth ? !x.public : x.public)).map(({ component, name, options }) => (
-          <Stack.Screen
-            key={name}
-            name={name}
-            options={options}
-            component={component}
-          />
-        ))}
-        {login?.auth && (
-          <Stack.Screen
-            name="HomeBase"
-            options={{ headerShown: false }}
-            component={tabComponents}
-          />
-        )}
-        {/* add your another screen here using -> Stack.Screen */}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ErrorScreen>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {stackNavigations.filter((x) => (auth ? !x.public : x.public)).map(({ component, name, options }) => (
+            <Stack.Screen
+              key={name}
+              name={name}
+              options={options}
+              component={component}
+            />
+          ))}
+          {auth && (
+            <Stack.Screen
+              name="HomeBase"
+              options={{ headerShown: false }}
+              component={tabComponents}
+            />
+          )}
+          {/* add your another screen here using -> Stack.Screen */}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ErrorScreen>
   );
 };
 
 const mapStateToProps = (state) => ({
-  login: state.authReducer,
+  auth: state.authReducer.auth,
 });
 
 export default connect(mapStateToProps, null)(MainNavigation);

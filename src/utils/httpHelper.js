@@ -29,7 +29,7 @@ instance.interceptors.request.use(async (config) => {
 instance.interceptors.response.use((response) => response, async (error) => {
   try {
     const originalRequest = error.config;
-    if (error.response?.status === 401 && !originalRequest.isRetry) {
+    if (error.response?.status === 401 && !originalRequest.isRetry && refreshToken) {
       originalRequest.isRetry = true;
       const { data } = await instance.post(refreshUrl, { refreshToken });
       instance.defaults.headers.common.Authorization = `Bearer ${data.data.access_token}`;

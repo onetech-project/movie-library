@@ -16,12 +16,14 @@ export default StyleSheet.create({
     padding: 100,
   },
   widgetNewsWrapper: {
-    flexGrow: 1,
     marginBottom: 20,
+
   },
   widgetInfoWrapper: {
     marginVertical: 10,
     marginHorizontal: 5,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   widgetInfo: {
     borderColor: Colors.red,

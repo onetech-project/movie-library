@@ -1,3 +1,3 @@
 import Views from './views';
 
-export default Views;
+export default { Views };

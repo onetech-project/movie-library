@@ -5,8 +5,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { connect } from 'react-redux';
-
-import { FlatList } from 'react-native-gesture-handler';
 import styles from './styles';
 import { BaseContainer, Widget } from '../../components';
 
@@ -17,32 +15,25 @@ const Home = () => (
         <Text>Image</Text>
       </TouchableOpacity>
       <View style={styles.widgetInfoWrapper}>
-        <FlatList
-          data={Array.from(Array(8).keys())}
-          numColumns={4}
-          renderItem={({ item }) => (
-            <Widget style={styles.widgetInfo}>
-              <Text>{item}</Text>
-            </Widget>
-          )}
-        />
+        {Array.from(Array(8).keys()).map((x) => (
+          <Widget key={x.toString()} style={styles.widgetInfo}>
+            <Text>{x}</Text>
+          </Widget>
+        ))}
       </View>
       <View style={styles.widgetNewsWrapper}>
-        <FlatList
-          data={Array.from(Array(4).keys())}
-          renderItem={({ item }) => (
-            <Widget style={styles.widgetNews}>
-              <Text>{item}</Text>
-            </Widget>
-          )}
-        />
+        {Array.from(Array(8).keys()).map((x) => (
+          <Widget key={x.toString()} style={styles.widgetNews}>
+            <Text>{x}</Text>
+          </Widget>
+        ))}
       </View>
     </BaseContainer>
   </>
 );
 
 const mapStateToProps = (state) => ({
-  auth: state.authReducer,
+  auth: state.authReducer.auth,
 });
 
 export default connect(mapStateToProps, null)(Home);

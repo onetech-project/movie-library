@@ -32,5 +32,6 @@ export default StyleSheet.create({
   progressBar: { width: '100%', flex: 1 },
   action: { flex: 2, alignItems: 'center', justifyContent: 'space-evenly', flexDirection: 'row' },
   errorMessage: { fontSize: 10 },
-  listEmpty: { alignContent: 'center', justifyContent: 'center' }
+  listEmpty: { alignContent: 'center', justifyContent: 'center' },
+  retry: { justifyContent: 'flex-end', flex: 0 }
 })
