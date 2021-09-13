@@ -5,6 +5,7 @@ export default StyleSheet.create({
   outerWrapper: {
     flex: 1,
     alignItems: 'center',
+    marginTop: 15,
     backgroundColor: Colors.white,
   },
   buttonStyle: {

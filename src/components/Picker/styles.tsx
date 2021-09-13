@@ -13,12 +13,13 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: Colors.whiteSmoke,
     elevation: 2,
+    marginLeft: 10
   },
   PickerList: {
     backgroundColor: Colors.white,
     borderWidth: 1,
     borderColor: Colors.whiteSmoke,
-    elevation: 2
+    elevation: 2,
   },
   PickerItem: {
     padding: 10,
