@@ -17,7 +17,7 @@
     "pushupdate:ios:prod": "appcenter codepush release-react -a farisbaros1/Movie-Library-1 -d Production",
     "android:bundleRelease": "cd android/ && ./gradlew bundleRelease && cd ..",
     "android:assembleRelease": "cd android/ && ./gradlew assembleRelease && cd ..",
-    "android:generateApks": "bundletool build-apks --bundle=android/app/build/outputs/bundle/release/app-release.aab --output=apks/app-release.apks --ks=prufast.keystore --ks-pass=pass:Password09 --ks-key-alias=prufast --key-pass=pass:Password09 --overwrite --mode=universal",
+    "android:generateApks": "bundletool build-apks --bundle=android/app/build/outputs/bundle/release/app-release.aab --output=apks/app-release.apks --ks=movie.keystore --ks-pass=pass:Password09 --ks-key-alias=movie --key-pass=pass:Password09 --overwrite --mode=universal",
     "android:installApks": "bundletool install-apks --apks=apks/app-release.apks",
     "android:install": "adb install android/app/build/outputs/apk/release/app-release.apk",
     "android:clean:windows": "cd android && .\\gradlew clean",
